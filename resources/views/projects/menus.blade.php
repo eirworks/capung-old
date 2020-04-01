@@ -2,6 +2,8 @@
 $menus = [
     ['id' => 'about', 'name' => __('projects.menus.about'), 'url' => route('projects.show', [$project])],
     ['id' => 'issues', 'name' => __('projects.menus.issues'), 'url' => route('projects.issues.index', [$project])],
+    ['id' => 'settings', 'name' => __('projects.menus.settings'), 'url' => '#'],
+    ['id' => 'form', 'name' => __('projects.menus.form'), 'url' => '#'],
 ];
 @endphp
 <ul class="nav nav-tabs card-header-tabs">

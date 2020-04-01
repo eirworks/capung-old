@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::group(['prefix' => 'projects/{project}', 'as' => 'projects.'], function() {
             Route::resource('issues', 'IssuesController');
+            Route::put('issues/{issue}/toggle', 'IssueStatusController@update')->name('issues.toggle');
         });
     });
 });

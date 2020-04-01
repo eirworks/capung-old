@@ -14,6 +14,9 @@
                 @include('projects.menus', ['selected' => 'issues'])
             </div>
             <div class="card-body">
+                <div class="mb-1">
+                    <a href="{{ route('projects.issues.create', [$project]) }}" class="btn btn-primary">{{ __('projects.new_issue') }}</a>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>

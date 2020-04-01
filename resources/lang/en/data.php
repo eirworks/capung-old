@@ -9,6 +9,7 @@ return [
     'owner' => 'Owner',
     'is_public' => 'Is Public?',
     'issues_count' => 'Issues',
+    'comments' => 'Comments',
 
     'public' => "Public",
     'private' => "Private",

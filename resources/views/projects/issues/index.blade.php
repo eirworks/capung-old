@@ -40,9 +40,13 @@
             <div class="my-1">
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary">{{ __('actions.reply') }}</a>
-                    <a href="#" class="btn btn-outline-primary">{{ __('actions.close_issue') }}</a>
+                    <button class="btn btn-outline-primary" form="toggle-issue">{{ __('actions.'.($issue->closed ? 'reopen_issue' : 'close_issue')) }}</button>
                 </div>
             </div>
+            <form id="toggle-issue" action="{{ route('projects.issues.toggle', [$project, $issue]) }}" method="post">
+                @csrf
+                @method('put')
+            </form>
         @endauth
 
         @foreach($comments as $comment)
