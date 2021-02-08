@@ -18,6 +18,7 @@ return [
 
     'login' => 'Login',
     'register' => 'Register',
+    'free_trial' => 'Start Free Trial',
     'logout' => 'Logout',
 
     'login_success' => "You're successfully signed in!",
