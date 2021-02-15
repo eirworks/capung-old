@@ -11,7 +11,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         return view('projects.index', [
-            'projects' => Project::public()
+            'projects' => Project::latest('updated_at')
                 ->withCount(['issues' => function($query) { $query->where('closed', false); }])
                 ->with(['user:id,name'])
                 ->paginate(),
@@ -19,23 +19,20 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function myProjects(Request $request)
-    {
-        return view('projects.index', [
-            'projects' => auth()->user()->projects()
-                ->withCount(['issues' => function($query) { $query->where('closed', false); }])
-                ->with(['user:id,name'])
-                ->paginate(),
-            'title' => __('projects.my_projects'),
-
-        ]);
-    }
-
     public function show(Project $project)
     {
+        $project->loadCount([
+//            'reports' => function($q) { $q->where('closed', false); },
+            'issues' => function($q) { $q->where('closed', false); },
+        ]);
+
+        $project->load(['user']);
+
+        $issues = $project->issues()->open()->paginate();
+
         return view('projects.show', [
             'project' => $project,
-            'issues' => $project->issues()->take(5)->open()->get(),
+            'issues' => $issues,
             'active' => 'about',
         ]);
     }
@@ -60,7 +57,16 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'slug' => 'required|',
+        ]);
+
         $project = new Project();
+        $project->name = $request->input('name');
+        $project->description = $request->input('description');
+        $project->slug = $request->input('slug');
 
         return redirect()->route('projects.myProjects')
             ->with('success', __('messages.saved', ['item' => __('projects.project')]));

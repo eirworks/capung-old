@@ -1,16 +1,33 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Issue;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Issue::class, function (Faker $faker) {
-    return [
-        'user_id' => 1,
-        'project_id' => 1,
-        'title' => $faker->issueTitle(),
-        'description' => $faker->realText(),
-        'closed' => $faker->boolean,
-    ];
-});
+class IssueFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Issue::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => 1,
+            'project_id' => 1,
+            'issue_number' => rand(1, 99),
+            'title' => $this->faker->issueTitle(),
+            'description' => $this->faker->realText(),
+            'closed' => $this->faker->boolean,
+        ];
+    }
+}

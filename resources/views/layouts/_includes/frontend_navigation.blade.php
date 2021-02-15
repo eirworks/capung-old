@@ -19,6 +19,7 @@
                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">{{ __('auth.login') }}</a></li>
                 @endguest
                 @auth
+                    <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link text-primary">{{ __('pages.dashboard') }}</a></li>
                     <li class="nav-item"><button form="logout" class="nav-link btn btn-link">{{ __('auth.logout') }}</button></li>
                 @endauth
             </ul>

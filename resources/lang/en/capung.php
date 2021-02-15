@@ -2,5 +2,6 @@
 
 return [
     'title' => "Bug Reporting for non Tech People",
-    'subtitle' => ""
+    'subtitle' => "",
+    'dashboard' => "Dashboard",
 ];

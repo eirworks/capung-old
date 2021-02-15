@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,9 @@ Route::get('/projects/browse', 'Projects\ProjectController@index')->name('projec
 Route::group(['middleware' => 'auth'], function() {
 
 
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::group(['namespace' => 'Projects'], function() {
-        Route::resource('projects', "ProjectController")->except(['index']);
-        Route::get('/my-projects', 'ProjectController@myProjects')->name('myProjects');
+        Route::resource('projects', "ProjectController");
 
         Route::group(['prefix' => 'projects/{project}', 'as' => 'projects.'], function() {
             Route::resource('issues', 'IssuesController');

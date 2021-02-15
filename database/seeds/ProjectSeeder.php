@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
         DB::table('comments')->truncate();
 
         factory(Project::class, 5)->create()->each(function($project){
-            $project->issues()->createMany(factory(Issue::class, 5)->make()->toArray());
+            $project->issues()->createMany(Issue::factory()->count(5)->make()->toArray());
         });
 
         $issues = Issue::get()->each(function($issue) {
